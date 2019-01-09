@@ -1,0 +1,4 @@
+image @basic/static/img/bg_
+
+
+stle @external_layout_background

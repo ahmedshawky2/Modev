@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<odoo>
+    
+
+
+
+    <record model="ir.ui.view" id="invoice_form_inhirherit">
+    <field name="name">invoice_form_inhirherit</field>
+    <field name="model">account.invoice</field>
+    <field name="inherit_id" ref="account.invoice_form"/>
+    <field name="arch" type="xml">
+           <field name="product_id" position="before">
+                <field name="x_parent_id" invisible="1"/>
+                <field name="x_bill"/>
+                <button name="do_calc_bill" type="object" string="Calculate Bill" class="oe_highlight"  attrs="{'invisible': [('x_parent_id', '>', 0)]}"/>
+            </field>
+    </field>
+</record>
+
+
+
+        <record model="ir.ui.view" id="Product_form_inhirherit">
+    <field name="name">Product_form_inhirherit</field>
+    <field name="model">product.product</field>
+    <field name="inherit_id" ref="product.product_normal_form_view"/>
+    <field name="arch" type="xml">
+           <field name="barcode" position="after">
+                <field name="x_analytic_account"/>
+            </field>
+    </field>
+</record>
+
+</odoo>
