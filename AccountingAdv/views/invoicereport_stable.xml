@@ -9,7 +9,7 @@
 
 
 
-		<div style="background-image: url('/AccountingAdv/static/src/img/back1.png');    background-repeat: no-repeat;background-size: 100% 100%;">
+
             <t t-call="AccountingAdv.external_layout">
 
                 <t t-set="o" t-value="o.with_context({'lang': lang})"/>
@@ -216,9 +216,8 @@
                         </p>
                     </div>
                 </div>
-			
             </t>
-			</div>
+
         </template>
 
             <template id="report_invoice">
@@ -294,12 +293,10 @@
                     <script t-if="enable_editor and inline_mode" type="text/javascript" src="/web_editor/static/src/js/inline.js"/>
                 </t>
             </head>
-            <body >
+            <body  >
                 <div id="wrapwrap"  >
                     <main t-att-class="'container' if not full_width else 'container-fluid'">
-
                         <t t-raw="0"/>
-
                     </main>
                 </div>
             </body>
@@ -339,15 +336,8 @@
 
 
         <div class="article o_report_layout_standard"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')" style="background-image: url('/AccountingAdv/static/src/img/back.png');    background-repeat: no-repeat;background-size: 100% 100%;">
-
-				<t t-call="AccountingAdv.address_layout"/>
-				<t t-raw="0"/>
-                 <div style="padding-bottom: 100%;background-image: url('/AccountingAdv/static/src/img/back1.png');    background-repeat: no-repeat;background-size: 100% 100%;" >
-
-
-           </div>
-
-
+            <t t-call="AccountingAdv.address_layout"/>
+            <t t-raw="0"/>
         </div>
 
         <div class="footer o_standard_footer" style="background-image: url('/AccountingAdv/static/src/img/back1.png');">
