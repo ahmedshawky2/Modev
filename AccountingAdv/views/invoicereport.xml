@@ -370,7 +370,7 @@ ON OVERDUE ACCOUNTS<br/><br/>
            <!--style="background-image: url('/AccountingAdv/static/src/img/back1.png');"-->
         <div class="footer o_standard_footer"  style ="  background-color: #EFECDD;">
             <div class="text-right">
-                    <img src="/AccountingAdv/static/src/img/logo.png"   style="    height: 100px;" alt="Logo"/>
+                    <img src="/AccountingAdv/static/src/img/logo.png"   style="    height: 90px;" alt="Logo"/>
             </div>
             <div class="text-center" style="border-top: 1px solid black;">
                 <ul class="list-inline mb4">
