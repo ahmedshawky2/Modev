@@ -11,7 +11,12 @@
     <field name="arch" type="xml">
            <field name="product_id" position="before">
                 <field name="x_parent_id" invisible="1"/>
+               <field name="isMangment" invisible="1"/>
+
+
                 <field name="x_bill"/>
+               <field name="MangFeesPrec" attrs="{'invisible': [('isMangment', '!=', True)]}"/>
+
                 <button name="do_calc_bill" type="object" string="Calculate Bill" class="oe_highlight"  attrs="{'invisible': [('x_parent_id', '>', 0)]}"/>
             </field>
     </field>
@@ -29,5 +34,6 @@
             </field>
     </field>
 </record>
+
 
 </odoo>

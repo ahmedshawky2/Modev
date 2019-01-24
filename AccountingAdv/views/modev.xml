@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<data>
+    <template id="modev">
+
+                <t t-call="web.html_container">
+
+                    <t t-foreach="docs" t-as="o">
+
+                        <t t-call="web.external_layout">
+                        <div style="color:red;">
+                            <style>
+                                    html {
+                                    height: 100%;
+                                    width: 100%;
+                                    padding : 100%;
+                                    background-color: #d24dff !important;
+                                    }
+                            </style>
+
+                            <div class="page">
+                                <h2>Report title</h2>
+                                <p>This object's name is <span t-field="o.name"/></p>
+                            </div>
+                        </div>
+                        </t>
+
+                    </t>
+
+                </t>
+
+    </template>
+</data>

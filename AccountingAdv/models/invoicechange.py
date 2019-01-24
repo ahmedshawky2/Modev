@@ -10,8 +10,17 @@ _logger = logging.getLogger(__name__)
 class groups(models.Model):
     _inherit = 'account.invoice.line'
     x_bill = fields.Many2one('account.invoice', 'Bill Number' , track_visibility=False,domain = [('type','=','in_invoice'),('state','!=','Draft')])
+
     #x_bill_name = fields.Many2one('account.invoice', string='Bill Number', related = 'x_bill.sequence_number_next')
     x_parent_id  = fields.Integer(string="Parent Line Id", required=False ,index=True)
+    MangFeesPrec = fields.Selection(
+        selection=[
+            ('4', '4 %'),
+            ('2', '2 %'),
+            ('8', '8 %')
+        ],
+        string='Management Fees %')
+    isMangment = fields.Boolean(string="isMang")
 
 
 
@@ -28,6 +37,22 @@ class groups(models.Model):
         prod=self.env['product.product'].search([['id', '=', self.product_id.id]])
         if prod :
             self.account_analytic_id=prod.x_analytic_account.id
+
+    @api.onchange('MangFeesPrec')
+    def MangemnetChange(self):
+
+        if self.MangFeesPrec and self.product_id.name != "Management Fees":
+            raise ValidationError("Can't Set Percentage for this Product");
+
+        if self.MangFeesPrec and self.x_parent_id:
+            parentrecord = self.env['account.invoice.line'].search([['id', '=', self.x_parent_id]])
+            if parentrecord:
+                self.price_unit =  (float(self.MangFeesPrec)/100.0) *float(parentrecord.x_bill.amount_untaxed)
+                self.name= str(self.MangFeesPrec) + ' % Management Fees  ' + "for " +str(parentrecord.x_bill.number)
+
+
+
+
 
 
     @api.multi
@@ -66,7 +91,10 @@ class groups(models.Model):
 
             'product_id': mangeprod.id,
             'name': '4% Management Fees  '+ "for " +self.x_bill.number,
-            'price_unit': 0.04*float(self.x_bill.amount_total_signed),
+
+            'price_unit': 0.04*float(self.x_bill.amount_untaxed),
+            'MangFeesPrec':'4',
+            'isMangment' :True,
             'invoice_id': parent_id,
             'account_id': mangeprod.property_account_income_id.id,
             'invoice_line_tax_ids': holdbackprod.taxes_id,

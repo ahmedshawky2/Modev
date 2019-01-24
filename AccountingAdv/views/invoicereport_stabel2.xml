@@ -4,16 +4,12 @@
 
         <template id="report_invoice_document_modev">
 
-<style>
-
-    *{
-    background-color: #EFECDD !important  ;
-    }
-</style>
 
 
 
-		<div style="background-color: #EFECDD !important">
+
+
+		<div style="background-image: url('/AccountingAdv/static/src/img/back1.png');    background-repeat: no-repeat;background-size: 100% 100%;">
             <t t-call="AccountingAdv.external_layout">
 
                 <t t-set="o" t-value="o.with_context({'lang': lang})"/>
@@ -28,10 +24,6 @@
 
 
                 <div class="page "   >
-                    <h3  t-if="o.date_invoice" name="invoice_date">
-                        <strong>Date:</strong>
-                        <span t-field="o.date_invoice"/>
-                    </h3>
                     <h2>
                         <span t-if="o.type == 'out_invoice' and o.state in ('open', 'in_payment', 'paid')">Invoice</span>
                         <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
@@ -43,13 +35,14 @@
                     </h2>
 
                     <div class="row mt32 mb32">
-
-
                         <div class="col-auto" t-if="o.name" name="description">
                             <strong>Description:</strong>
                             <p t-field="o.name"/>
                         </div>
-
+                        <div class="col-auto" t-if="o.date_invoice" name="invoice_date">
+                            <strong>Invoice Date:</strong>
+                            <p t-field="o.date_invoice"/>
+                        </div>
                         <div class="col-auto" t-if="o.date_due and o.type == 'out_invoice' and o.state in ('open', 'in_payment', 'paid')" name="due_date">
                             <strong>Due Date:</strong>
                             <p t-field="o.date_due"/>
@@ -201,9 +194,9 @@
                             </div>
                         </div>
                     </div>
-                    <!--<p t-if="o.reference">
+                    <p t-if="o.reference">
                         Please use the following communication for your payment : <b><span t-field="o.reference"/></b>
-                    </p> -->
+                    </p>
                     <p t-if="o.comment" name="comment">
                         <span t-field="o.comment"/>
                     </p>
@@ -301,9 +294,9 @@
                     <script t-if="enable_editor and inline_mode" type="text/javascript" src="/web_editor/static/src/js/inline.js"/>
                 </t>
             </head>
-            <body style="background-color: #EFECDD;" >
-                <div id="wrapwrap" style="background-color: #EFECDD;" >
-                    <main t-att-class="'container' if not full_width else 'container-fluid'" style="background-color: #EFECDD;" >
+            <body >
+                <div id="wrapwrap"  >
+                    <main t-att-class="'container' if not full_width else 'container-fluid'">
 
                         <t t-raw="0"/>
 
@@ -316,9 +309,9 @@
 
 
 
-<!--background-image: url('/AccountingAdv/static/src/img/back1.png');    background-repeat: no-repeat;background-size: 100% 100%;-->
+
        <template id="external_layout_standard">
-        <div class="header" style="background-color: #EFECDD;">
+        <div class="header" style="background-image: url('/AccountingAdv/static/src/img/back1.png');    background-repeat: no-repeat;background-size: 100% 100%;">
 
 
             <div class="row">
@@ -345,33 +338,19 @@
         </div>
 
 
-        <div class="article o_report_layout_standard"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')" style="  background-color: #EFECDD;">
+        <div class="article o_report_layout_standard"  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')" style="background-image: url('/AccountingAdv/static/src/img/back.png');    background-repeat: no-repeat;background-size: 100% 100%;">
 
 				<t t-call="AccountingAdv.address_layout"/>
 				<t t-raw="0"/>
-
-            <div>
-TERMS: ACCOUNT DUE AND PAYABLE<br/>
-UPON RECEIPT, INTEREST PAYABLE<br/>
-AT 2% PER MONTH (26.8% PER ANNUM)<br/>
-ON OVERDUE ACCOUNTS<br/><br/>
-            </div>
-            <div>
-                <b>GST # 713457893</b>
-            </div>
-                 <div style="padding-bottom: 100%;" >
+                 <div style="padding-bottom: 100%;background-image: url('/AccountingAdv/static/src/img/back1.png');    background-repeat: no-repeat;background-size: 100% 100%;" >
 
 
-                 </div>
+           </div>
 
 
         </div>
 
-           <!--style="background-image: url('/AccountingAdv/static/src/img/back1.png');"-->
-        <div class="footer o_standard_footer"  style ="  background-color: #EFECDD;">
-            <div class="text-right">
-                    <img src="/AccountingAdv/static/src/img/logo.png"   style="    height: 100px;" alt="Logo"/>
-            </div>
+        <div class="footer o_standard_footer" style="background-image: url('/AccountingAdv/static/src/img/back1.png');">
             <div class="text-center" style="border-top: 1px solid black;">
                 <ul class="list-inline mb4">
                     <li t-if="company.phone" class="list-inline-item">Phone: <span t-field="company.phone"/></li>

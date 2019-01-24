@@ -8,7 +8,8 @@
 
             'views/invoicereport.xml',
             'views/testreport.xml',
-        "views/invoice_form_inherit.xml"
+        "views/invoice_form_inherit.xml",
+		"views/modev.xml"
 
 
 

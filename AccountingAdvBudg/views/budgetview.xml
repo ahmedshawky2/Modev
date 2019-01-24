@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<odoo>
+    
+     <record id="view_budget_post_tree_inherit" model="ir.ui.view" >
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//tree[1]/field[@name='name']" position="before">
+          <field name="x_bp_code"/>
+        </xpath>
+      </data>
+    </field>
+    <field name="inherit_id" ref="account_budget.view_budget_post_tree"/>
+    <field name="key" eval="False"/>
+    <field name="mode">extension</field>
+    <field name="model">account.budget.post</field>
+    <field name="name">Budget tree</field>
+    <field name="type">tree</field>
+  </record>
+
+
+    <record id="view_budget_post_form_inherit" model="ir.ui.view" >
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//form[1]/group[1]/field[@name='name']" position="after">
+          <field name="x_bp_code"/>
+        </xpath>
+      </data>
+    </field>
+    <field name="inherit_id" ref="account_budget.view_budget_post_form"/>
+    <field name="mode">extension</field>
+    <field name="model">account.budget.post</field>
+    <field name="name">Budget Form</field>
+    <field name="type">form</field>
+  </record>
+
+
+
+      <record id="crossovered_budget_line_tree_inherit" model="ir.ui.view">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//field[@name='general_budget_id']" position="after">
+          <field name="x_bp_code" string="Code"/>
+        </xpath>
+      </data>
+    </field>
+    <field name="inherit_id" ref="account_budget.view_crossovered_budget_line_tree"/>
+
+    <field name="mode">extension</field>
+    <field name="model">crossovered.budget.lines</field>
+    <field name="name">Budget </field>
+    <field name="type">tree</field>
+  </record>
+
+</odoo>
