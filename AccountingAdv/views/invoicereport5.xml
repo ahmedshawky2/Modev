@@ -369,22 +369,26 @@ ON OVERDUE ACCOUNTS<br/><br/>
 
            <!--style="background-image: url('/AccountingAdv/static/src/img/back1.png');"-->
         <div class="footer o_standard_footer"  style ="  background-color: #EFECDD;">
+            <div class="text-right">
+                    <img src="/AccountingAdv/static/src/img/logo.png"   style="    height: 90px;" alt="Logo"/>
+            </div>
+            <div class="text-center" style="border-top: 1px solid black;">
+                <ul class="list-inline mb4">
+                    <li t-if="company.phone" class="list-inline-item">Phone: <span t-field="company.phone"/></li>
+                    <li t-if="company.email" class="list-inline-item">Email: <span t-field="company.email"/></li>
+                    <li t-if="company.website" class="list-inline-item">Web: <span t-field="company.website"/></li>
+                    <li t-if="company.vat" class="list-inline-item"><t t-esc="company.country_id.vat_label or 'Tax ID'"/>: <span t-field="company.vat"/></li>
+                </ul>
 
-        <div t-if="report_type == 'pdf'" class="text-muted">
-        Page: <span class="page"/> / <span class="topage"/>
+                <div name="financial_infos">
+                    <span t-field="company.report_footer"/>
+                </div>
+
+                <div t-if="report_type == 'pdf'" class="text-muted">
+                    Page: <span class="page"/> / <span class="topage"/>
+                </div>
+            </div>
         </div>
-    <div class="text-right">
-        <b> <span t-field="company.website"/> </b> <span style="color:gray">|</span>
-
-        <span t-field="company.phone"/>
-        <span style="color:gray">|</span>
-        <span t-field="company.email"/>
-        <img src="/AccountingAdv/static/src/img/logo.png"   style="    height: 140px;" alt="Logo"/>
-    </div>
-
-        </div>
-
-
     </template>
 
 
