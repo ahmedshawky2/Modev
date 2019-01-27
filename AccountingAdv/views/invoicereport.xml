@@ -373,10 +373,11 @@ ON OVERDUE ACCOUNTS<br/><br/>
            <!--style="background-image: url('/AccountingAdv/static/src/img/back1.png');"-->
         <div class="footer o_standard_footer"  style ="  background-color: #EFECDD;">
 
-     <span t-if="report_type == 'pdf'" class="text-left text-muted">
+
+    <div class="text-right">
+          <span t-if="report_type == 'pdf'" class="text-left text-muted">
         Page: <span class="page"/> / <span class="topage"/>
         </span>
-    <div class="text-right">
         <b> <span t-field="company.website"/> </b> <span style="color:gray">|</span>
 
         <span t-field="company.phone"/>
