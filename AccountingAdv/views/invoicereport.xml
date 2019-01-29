@@ -383,7 +383,7 @@ ON OVERDUE ACCOUNTS<br/><br/>
         <span t-field="company.phone"/>
         <span style="color:gray">|</span>
         <span t-field="company.email"/>
-        <img src="/AccountingAdv/static/src/img/logo.png"   style=" padding: 10px;    height: 140px;" alt="Logo"/>
+        <img src="/AccountingAdv/static/src/img/logo.png"   style="   height: 140px;" alt="Logo"/>
     </div>
 
         </div>
