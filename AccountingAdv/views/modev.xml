@@ -7,15 +7,40 @@
                     <t t-foreach="docs" t-as="o">
 
                         <t t-call="web.external_layout">
-                        <div style="color:red;">
-                            <style>
-                                    html {
-                                    height: 100%;
-                                    width: 100%;
-                                    padding : 100%;
-                                    background-color: #d24dff !important;
-                                    }
+                        <div>
+       <style>
+                              html,
+                                  body {
+                                    margin: 0;
+                                    padding: 0;
+                                    text-rendering: optimizeLegibility;
+                                  }
+
+                                  .article {
+                                    position: relative;
+                                    page-break-after: always;
+                                    margin: 0;
+                                    padding: 0;
+                                    width: 21cm;
+                                    height: 30cm;
+                                    overflow: hidden;
+                                    background-color: #EFECDD;
+                                  }
                             </style>
+
+                                    <div class="header  mb-4"><!--background-color: #EFECDD;-->
+
+
+            <div class="row">
+                <div class="col-12">
+
+                    <img src="/AccountingAdv/static/src/img/header.png" style="width:100%" alt="Logo"/>
+                    <br/>
+                </div>
+
+            </div>
+
+        </div>
 
                             <div class="page">
                                 <h2>Report title</h2>

@@ -4,7 +4,15 @@
 
         <template id="report_invoice_document_modev">
 
+<style>
 
+    <!--*{
+    background-color: #EFECDD !important  ;
+    }-->
+    .o_standard_footer {
+    margin-top: 0px !important;
+}
+</style>
 
 
 
@@ -23,12 +31,11 @@
 
 
                 <div class="page mx-2 mt-2"   >
-                <t t-set="inovicdate">
-                    <p  t-if="o.date_invoice" name="invoice_date">
+                    <h4  t-if="o.date_invoice" name="invoice_date">
                         <!--<span t-field="o.date_invoice"/>-->
                         <span t-field="o.date_invoice" t-options='{"format": "MMMM dd, yyyy"}'/>
-                    </p>
-                    <p>
+                    </h4>
+                    <h4>
                         <span t-if="o.type == 'out_invoice' and o.state in ('open', 'in_payment', 'paid')">Invoice</span>
                         <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
                         <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
@@ -36,8 +43,7 @@
                         <span t-if="o.type == 'in_refund'">Vendor Credit Note</span>
                         <span t-if="o.type == 'in_invoice'">Vendor Bill</span>
                         <span t-field="o.number"/>
-                    </p>
-                </t>
+                    </h4>
 
                  <!--   <div class="row mt32 mb32">
 
@@ -67,9 +73,9 @@
 
                     <t t-set="display_discount" t-value="any([l.discount for l in o.invoice_line_ids])"/>
 					<t t-set="display_bill" t-value="any([l.x_bill.number for l in o.invoice_line_ids])"/>
-                    <br/>
+
                     <table class="table table-sm mt-1" name="invoice_line_table">
-                        <thead class="mt-1">
+                        <thead>
                             <tr>
                                 <t t-set="colspan" t-value="6"/>
                         		<th t-if="display_bill" t-attf-class="text-left  {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
@@ -220,7 +226,7 @@
                         </p>
                     </div>
                 </div>
-
+			
             </t>
 			</div>
         </template>
@@ -244,30 +250,6 @@
 
 
         <template id="external_layout">
-
-<!--            <style>
-                              html,
-                                  body {
-                                    margin: 0;
-                                    padding: 0;
-                                    text-rendering: optimizeLegibility;
-                                  }
-
-                                  .page {
-                                    position: relative;
-                                    page-break-after: always;
-                                    margin: 0;
-                                    padding: 0;
-                                    width: 21cm;
-                                    height: 35.5cm;
-                                    overflow: hidden;
-                                    background-color: #fff9ed;
-                                  }
-                            </style>
-
-
-                            -->
-
                 <t t-if="not o" t-set="o" t-value="doc"/>
 
                 <t t-if="not company">
@@ -302,7 +284,35 @@
         <html t-att-lang="lang and lang.replace('_', '-')" t-att-data-editable="'1' if editable else None" t-att-data-translatable="'1' if translatable else None" t-att-data-edit_translations="'1' if edit_translations else None" t-att-data-main-object="repr(main_object) if editable else None" t-att-data-report-margin-top="data_report_margin_top" t-att-data-report-header-spacing="data_report_header_spacing" t-att-data-report-dpi="data_report_dpi" t-att-data-report-landscape="data_report_landscape" t-att-web-base-url="web_base_url">
             <head>
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"/>
+                <style>
 
+                    @font-face {
+    font-family: 'avenir';
+    src:  url(/AccountingAdv/static/src/fonts/avenir.ttc) format('truetype');
+}
+
+
+                </style>
+
+                <style>
+                              html,
+                                  body {
+                                    margin: 0;
+                                    padding: 0;
+                                    text-rendering: optimizeLegibility;
+                                  }
+
+                                  .page {
+                                    position: relative;
+                                    page-break-after: always;
+                                    margin: 0;
+                                    padding: 0;
+                                    width: 21cm;
+                                    height: 35.5cm;
+                                    overflow: hidden;
+                                    background-color: #fff9ed;
+                                  }
+                            </style>
                 <meta charset="utf-8"/>
                 <meta name="viewport" content="initial-scale=1"/>
                 <title><t t-esc="title or 'Odoo Report'"/></title>
@@ -342,13 +352,13 @@
 
 <!--background-image: url('/AccountingAdv/static/src/img/back1.png');    background-repeat: no-repeat;background-size: 100% 100%;-->
        <template id="external_layout_standard">
-        <div class="header  mb-4"><!--background-color: #EFECDD;-->
+        <div class="header" style=""><!--background-color: #EFECDD;-->
 
 
             <div class="row">
                 <div class="col-12">
 
-                    <img src="/AccountingAdv/static/src/img/header.png" style="width:100%" alt="Logo"/>
+                    <img src="/AccountingAdv/static/src/img/header.png" style="width:100%;" alt="Logo"/>
                     <br/>
                 </div>
 
@@ -373,10 +383,8 @@
 
 <!--o_report_layout_standard-->
 
-            <div class="article o_report_layout_standard "  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')" t-attf-style="background-color: #EFECDD; height: {{o.x_invoicecount}}px;"><!--;padding-bottom: 50rem; --> <!--29.4-->
-
-
-<div style="background-color: #EFECDD;z-index:100">
+            <div class="article o_report_layout_standard "  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')" style="background-color: #EFECDD;height:2164px;z-index:-100;"><!--;padding-bottom: 50rem; --> <!--29.4-->
+<div style="z-index:100">
 
 				<t t-call="AccountingAdv.address_layout"/>
 				<t t-raw="0"/>
@@ -413,25 +421,16 @@
 
 
 <template t-name="address_layout">
-  <t t-set="colclass" t-value="('col-md-6' if report_type == 'html' else 'col-5 mx-2') + ' '"/>
-
-    <t t-if="inovicdate">
-    </t>
-
+  <t t-set="colclass" t-value="('col-md-5' if report_type == 'html' else 'col-5') + ' ml-auto'"/>
         <t t-if="address">
             <div class="address row">
-               <!-- <t t-if="information_block">
+                <t t-if="information_block">
                     <t t-set="colclass" t-value="'col-5 offset-1'"/>
                     <div name="information_block" class="col-6">
                         <t t-raw="information_block"/>
                     </div>
                 </t>
-                -->
-                <div name="inovicdate"  t-att-class="colclass">
-                    <br/>
-                    <t t-raw="inovicdate"/>
-                </div>
-                <div name="address"   t-att-class="colclass">
+                <div name="address" t-att-class="colclass">
                     <t t-raw="address"/>
                 </div>
             </div>

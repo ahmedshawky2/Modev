@@ -69,7 +69,7 @@
 					<t t-set="display_bill" t-value="any([l.x_bill.number for l in o.invoice_line_ids])"/>
                     <br/>
                     <table class="table table-sm mt-1" name="invoice_line_table">
-                        <thead class="mt-1">
+                        <thead>
                             <tr>
                                 <t t-set="colspan" t-value="6"/>
                         		<th t-if="display_bill" t-attf-class="text-left  {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
@@ -220,7 +220,7 @@
                         </p>
                     </div>
                 </div>
-
+			
             </t>
 			</div>
         </template>
