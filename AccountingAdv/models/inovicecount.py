@@ -15,7 +15,7 @@ class inovicecount(models.Model):
     def associate_count(self):
         for rec in self:
             #px= 1082
-            px = 1018
+            px = 1015
             first = 17
             x = self.env['account.invoice.line'].search_count([('invoice_id', '=', rec.id)])
             if(x<=first):
