@@ -14,7 +14,8 @@ class inovicecount(models.Model):
     @api.depends('invoice_line_ids')
     def associate_count(self):
         for rec in self:
-            px= 1082
+            #px= 1082
+            px = 850
             first = 17
             sec = 48
             x = self.env['account.invoice.line'].search_count([('invoice_id', '=', rec.id)])
