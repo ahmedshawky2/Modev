@@ -36,4 +36,15 @@
 </record>
 
 
+    <record model="ir.ui.view" id="Invoice_form_inhirherit">
+    <field name="name">Invoice_form_inhirherit</field>
+    <field name="model">account.invoice</field>
+    <field name="inherit_id" ref="account.invoice_form"/>
+    <field name="arch" type="xml">
+           <field name="user_id" position="after">
+                <field name="x_invoicecount"/>
+            </field>
+    </field>
+</record>
+
 </odoo>

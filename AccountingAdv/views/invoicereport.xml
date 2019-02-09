@@ -373,7 +373,7 @@
 
 <!--o_report_layout_standard-->
 
-            <div class="article o_report_layout_standard "  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')" t-attf-style="background-color: #EFECDD; height: {{o.x_invoicecount}}px;"><!--;padding-bottom: 50rem; --> <!--29.4-->
+            <div class="article o_report_layout_standard "  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')" t-attf-style="background-color: #EFECDD; height: {{o.x_invoicecount * 1015}}px;"><!--;padding-bottom: 50rem; --> <!--29.4-->
 
 
 <div style="background-color: #EFECDD;z-index:100">
