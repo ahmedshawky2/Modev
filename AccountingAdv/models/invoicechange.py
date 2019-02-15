@@ -60,7 +60,8 @@ class groups(models.Model):
         if not self.x_bill:
             raise ValidationError("No Bill");
 
-        holdbackprod= self.env['product.product'].search([['name','=','Holdback']])
+        holdbackBill= self.env['product.product'].search([['name','=','Holdback Bill']])
+        holdbackInvoice = self.env['product.product'].search([['name', '=', 'Holdback Invocie']])
         mangeprod = self.env['product.product'].search([['name', '=', 'Management Fees']])
         RemainingHoldback = self.env['product.product'].search([['name', '=', 'Remaining Holdback']])
         #raise ValidationError(mangeprod)
@@ -68,17 +69,17 @@ class groups(models.Model):
         parent_obj = self.env['account.invoice'].browse(parent_id)
 
         for record in  self.x_bill.invoice_line_ids:
-            if record.product_id.id==holdbackprod.id:
+            if record.product_id.id==holdbackBill.id:
                 parent_obj.invoice_line_ids.create({
 
-                    'product_id': record.product_id.id,
-                    'name':record.name + "for " +self.x_bill.number  ,
+                    'product_id': holdbackInvoice.id,
+                    'name':"HoldBack" + " for " +self.x_bill.number  ,
                     'price_unit':record.price_unit,
                     'invoice_id':parent_id,
-                    'account_id':holdbackprod.property_account_income_id.id,
-                    'invoice_line_tax_ids':holdbackprod.taxes_id,
+                    'account_id':holdbackInvoice.property_account_income_id.id,
+                    'invoice_line_tax_ids':holdbackInvoice.taxes_id,
                     'x_parent_id':self.id,
-                    'account_analytic_id':holdbackprod.x_analytic_account.id
+                    'account_analytic_id':holdbackInvoice.x_analytic_account.id
 
                 })
                 self.price_unit = self.price_unit+abs(record.price_unit)
@@ -97,7 +98,7 @@ class groups(models.Model):
             'isMangment' :True,
             'invoice_id': parent_id,
             'account_id': mangeprod.property_account_income_id.id,
-            'invoice_line_tax_ids': holdbackprod.taxes_id,
+            'invoice_line_tax_ids': mangeprod.taxes_id,
             'x_parent_id': self.id,
             'account_analytic_id': mangeprod.x_analytic_account.id
 
@@ -107,9 +108,9 @@ class groups(models.Model):
 
     @api.multi
     def unlink(self):
-        holdbackprod = self.env['product.product'].search([['name', '=', 'Holdback']])
+        holdbackInv = self.env['product.product'].search([['name', '=', 'Holdback Invocie']])
         if self  and self.x_parent_id:
-            if self.product_id.id == holdbackprod.id:
+            if self.product_id.id == holdbackInv.id:
                 p=self.env['account.invoice.line'].browse(self.x_parent_id)
                 if p :
                     p.price_unit = p.price_unit - abs(self.price_unit)
