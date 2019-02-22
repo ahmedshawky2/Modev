@@ -68,6 +68,10 @@ class groups(models.Model):
         parent_id = self.invoice_id.id
         parent_obj = self.env['account.invoice'].browse(parent_id)
 
+        bill_id = self.x_bill.id
+        bill = self.env['account.invoice'].browse(bill_id)
+        vendorname = bill.partner_id.name;
+
         for record in  self.x_bill.invoice_line_ids:
             if record.product_id.id==holdbackBill.id:
                 parent_obj.invoice_line_ids.create({
@@ -83,6 +87,8 @@ class groups(models.Model):
 
                 })
                 self.price_unit = self.price_unit+abs(record.price_unit)
+            else:
+                self.name = vendorname +" : " + record.product_id.name +" [" +record.product_id.default_code +"]"
 
             if record.product_id.id ==RemainingHoldback.id:
              #self.x_parent_id   raise ValidationError(RemainingHoldback.x_analytic_account.id)
