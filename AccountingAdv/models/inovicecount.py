@@ -10,6 +10,7 @@ _logger = logging.getLogger(__name__)
 class inovicecount(models.Model):
     _inherit = 'account.invoice'
     x_invoicecount = fields.Integer( string='# of pages', store='true',default=1)
+    x_vendor_bill  = fields.Char(string="Vendor Bill #", required=True, index=True, track_visibility=False)
 
     @api.onchange('invoice_line_ids')
     def _onchange_inovice_line_id(self):

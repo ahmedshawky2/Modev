@@ -47,8 +47,13 @@ class groups(models.Model):
         if self.MangFeesPrec and self.x_parent_id:
             parentrecord = self.env['account.invoice.line'].search([['id', '=', self.x_parent_id]])
             if parentrecord:
+                vendorname = parentrecord.x_bill.partner_id.name
+                ven_bill = parentrecord.x_bill.x_vendor_bill
+                ven_bill_text = ""
+                if ven_bill:
+                    ven_bill_text = " for INV: " + ven_bill
                 self.price_unit =  (float(self.MangFeesPrec)/100.0) *float(parentrecord.x_bill.amount_untaxed)
-                self.name= str(self.MangFeesPrec) + ' % Management Fees  ' + "for " +str(parentrecord.x_bill.number)
+                self.name= vendorname +", "+str(self.MangFeesPrec) + '% Management Fees' +ven_bill_text
 
 
 
@@ -70,14 +75,18 @@ class groups(models.Model):
 
         bill_id = self.x_bill.id
         bill = self.env['account.invoice'].browse(bill_id)
-        vendorname = bill.partner_id.name;
+        vendorname = bill.partner_id.name
+        ven_bill = bill.x_vendor_bill
+        ven_bill_text=""
+        if ven_bill:
+            ven_bill_text =" for INV: " + ven_bill
 
         for record in  self.x_bill.invoice_line_ids:
             if record.product_id.id==holdbackBill.id:
                 parent_obj.invoice_line_ids.create({
 
                     'product_id': holdbackInvoice.id,
-                    'name':"HoldBack" + " for " +self.x_bill.number  ,
+                    'name': vendorname + ", HoldBack" + ven_bill_text ,#self.x_bill.number  ,
                     'price_unit':record.price_unit,
                     'invoice_id':parent_id,
                     'account_id':holdbackInvoice.property_account_income_id.id,
@@ -88,7 +97,7 @@ class groups(models.Model):
                 })
                 self.price_unit = self.price_unit+abs(record.price_unit)
             else:
-                self.name = vendorname +" : " + record.product_id.name +" [" +record.product_id.default_code +"]"
+                self.name = vendorname +", " + record.product_id.name +" [" +record.product_id.default_code +"]" + ven_bill_text
 
             if record.product_id.id ==RemainingHoldback.id:
              #self.x_parent_id   raise ValidationError(RemainingHoldback.x_analytic_account.id)
@@ -97,7 +106,8 @@ class groups(models.Model):
         parent_obj.invoice_line_ids.create({
 
             'product_id': mangeprod.id,
-            'name': '4% Management Fees  '+ "for " +self.x_bill.number,
+            #'name': ":4% Management Fees  '+ for " +self.x_bill.number,
+            'name': vendorname + ", 4% Management Fees" + ven_bill_text,  # self.x_bill.number  ,
 
             'price_unit': 0.04*float(self.x_bill.amount_untaxed),
             'MangFeesPrec':'4',
