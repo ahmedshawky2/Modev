@@ -19,6 +19,39 @@
 
                 <button name="do_calc_bill" type="object" string="Calculate Bill" class="oe_highlight"  attrs="{'invisible': [('x_parent_id', '>', 0)]}"/>
             </field>
+
+            <field name="amount_tax" position="replace">
+
+
+
+             <!--   <field name="x_pst_total"/>
+                <field name="x_gst_total"/> -->
+                <field name="x_pst_total_inv" string = "PST"/>
+                <field name="x_gst_total_inv" string = "GST"/>
+
+
+            </field>
+
+                    <field name="amount_total" position="replace">
+
+
+
+                <field name="x_inv_total"/>
+
+
+
+            </field>
+
+         <field name="amount_untaxed" position="replace">
+
+
+
+                <field name="x_sub_total"/>
+
+
+
+            </field>
+
     </field>
 </record>
 
@@ -55,7 +88,8 @@
     <field name="inherit_id" ref="account.invoice_supplier_form"/>
     <field name="arch" type="xml">
            <field name="vendor_bill_id" position="after">
-                <field name="x_vendor_bill"/>
+                <field name="x_vendor_bill" attrs="{'required': [['type','=','in_invoice']]}"/>
+               <field name="x_is_Invoiced"/>
             </field>
     </field>
 </record>

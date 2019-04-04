@@ -191,10 +191,22 @@
                                             </t>
                                         </tr>
                                     </t>
+                                      <tr  >
+                                        <td><strong>PST</strong></td>
+                                        <td class="text-right">
+                                            <span t-field="o.x_pst_total_inv"/>
+                                        </td>
+                                    </tr>
+                                       <tr >
+                                        <td><strong>GST</strong></td>
+                                        <td class="text-right">
+                                            <span t-field="o.x_gst_total_inv"/>
+                                        </td>
+                                    </tr>
                                     <tr class="border-black">
                                         <td><strong>Total</strong></td>
                                         <td class="text-right">
-                                            <span t-field="o.amount_total"/>
+                                            <span t-field="o.x_inv_total"/>
                                         </td>
                                     </tr>
                                 </table>
