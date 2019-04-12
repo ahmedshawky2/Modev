@@ -192,7 +192,7 @@
                                         </tr>
                                     </t>-->
                                       <tr  >
-                                        <td><strong>PST1</strong></td>
+                                        <td><strong>PST</strong></td>
                                         <td class="text-right">
                                             <span t-field="o.x_pst_total_inv"/>
                                         </td>
