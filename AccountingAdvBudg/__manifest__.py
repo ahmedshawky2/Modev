@@ -2,7 +2,7 @@
     'name': 'AccountingAdvBudg',
     'description': 'AccountingAdvBudg',
     'author': 'Minds',
-    'depends': ['base','account','account_accountant','AccountingAdv'],
+    'depends': ['base','account','account_accountant','AccountingAdv','l10n_ca'],
     'application': True,
     'data': [
 

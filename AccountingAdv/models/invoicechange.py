@@ -91,6 +91,8 @@ class groups(models.Model):
         holdbackInvoice = self.env['product.product'].search([['name', '=', 'Holdback Invocie']])
         mangeprod = self.env['product.product'].search([['name', '=', 'Management Fees']])
         RemainingHoldback = self.env['product.product'].search([['name', '=', 'Remaining Holdback']])
+        PST = self.env['product.product'].search([['name', '=', 'PST']])
+        GST = self.env['product.product'].search([['name', '=', 'GST']])
         #raise ValidationError(mangeprod)
         parent_id = self.invoice_id.id
         parent_obj = self.env['account.invoice'].browse(parent_id)
@@ -125,20 +127,37 @@ class groups(models.Model):
                       , mangeprod.taxes_id, self.id,
                       mangeprod.x_analytic_account.id,self.sequence,
                       '4', True)
+
+        tempgst =0
+        temppst =0
         for r in self.x_bill.tax_line_ids:
-            groups.createproduct(self, parent_obj, '', r.name + ven_bill_text,
-                                r.amount,
-                                 parent_id,
-                                  mangeprod.property_account_income_id.id,
-                                 '',
-                                 self.id,
-                                 '',
-                                 self.sequence
-                                 )
+
             if(r.name.startswith("GST")):
                 parent_obj.x_gst_total += r.amount
+                tempgst +=r.amount
             elif(r.name.startswith("PST")):
                 parent_obj.x_pst_total += r.amount
+                temppst += r.amount
+        if parent_obj.x_pst_total:
+            groups.createproduct(self, parent_obj, PST.id, PST.name + ven_bill_text,
+                             temppst,
+                             parent_id,
+                             PST.property_account_income_id.id,
+                             '',
+                             self.id,
+                             PST.x_analytic_account.id,
+                             self.sequence
+                             )
+        if parent_obj.x_gst_total:
+            groups.createproduct(self, parent_obj, GST.id, GST.name + ven_bill_text,
+                             tempgst,
+                             parent_id,
+                             GST.property_account_income_id.id,
+                             '',
+                             self.id,
+                             GST.x_analytic_account.id,
+                             self.sequence
+                             )
 
 
 

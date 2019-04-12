@@ -77,6 +77,12 @@
            <field name="user_id" position="after">
                 <field name="x_invoicecount"/>
             </field>
+
+        <xpath expr="//form/header" position="inside">
+
+        <button name="onchange_amount_tax" type="object" string="TAX" class="oe_highlight"/>
+
+</xpath>
     </field>
 </record>
 
@@ -94,7 +100,44 @@
     </field>
 </record>
 
-
+<record id="odoo_studio_account__02da3f62-3aed-46f5-9942-c6057f28f057" model="ir.ui.view">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//field[@name='date_invoice']" position="after">
+          <field name="x_vendor_bill"/>
+        </xpath>
+      </data>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" ref="account.invoice_supplier_tree"/>
+    <field name="key" eval="False"/>
+    <field name="mode">extension</field>
+    <field name="model">account.invoice</field>
+    <field name="name">Odoo Studio: account.invoice.supplier.tree customization</field>
+    <field name="priority">99</field>
+    <field name="type">tree</field>
+  </record>
+  <record id="odoo_studio_account__1fa11052-4a32-4ff3-9044-46f3714fefca" model="ir.ui.view">
+    <field name="active" eval="True"/>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//field[@name='number']" position="before">
+          <field name="x_vendor_bill"/>
+        </xpath>
+      </data>
+    </field>
+    <field name="field_parent" eval="False"/>
+    <field name="groups_id" eval="[(6, 0, [])]"/>
+    <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+    <field name="key" eval="False"/>
+    <field name="mode">extension</field>
+    <field name="model">account.invoice</field>
+    <field name="name">Odoo Studio: account.invoice.select customization</field>
+    <field name="priority">99</field>
+    <field name="type">search</field>
+  </record>
 
 
 
