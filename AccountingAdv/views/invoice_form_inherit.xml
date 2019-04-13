@@ -94,7 +94,7 @@
     <field name="inherit_id" ref="account.invoice_supplier_form"/>
     <field name="arch" type="xml">
            <field name="vendor_bill_id" position="after">
-                <field name="x_vendor_bill" attrs="{'required': [['type','=','in_invoice']]}"/>
+                <field name="x_vendor_bill" /> <!--attrs="{'required': [['type','=','in_invoice']]}"-->
                <field name="x_is_Invoiced"/>
             </field>
     </field>

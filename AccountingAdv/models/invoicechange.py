@@ -53,7 +53,7 @@ class groups(models.Model):
                 ven_bill = parentrecord.x_bill.x_vendor_bill
                 ven_bill_text = ""
                 if ven_bill:
-                    ven_bill_text = " for INV: " + ven_bill
+                    ven_bill_text = " for INV # " + ven_bill
                 self.price_unit =  (float(self.MangFeesPrec)/100.0) *float(parentrecord.x_bill.amount_untaxed)
                 self.name= vendorname +", "+str(self.MangFeesPrec) + '% Management Fees' +ven_bill_text
 
@@ -105,7 +105,7 @@ class groups(models.Model):
         bill.x_is_Invoiced = True   # change bill to be marked as Invoiced
         ven_bill_text=""
         if ven_bill:
-            ven_bill_text =" INV: " + ven_bill
+            ven_bill_text =" INV# " + ven_bill
 
         for record in  self.x_bill.invoice_line_ids:
             if record.product_id.id==holdbackBill.id:
@@ -138,7 +138,7 @@ class groups(models.Model):
             elif(r.name.startswith("PST")):
                 parent_obj.x_pst_total += r.amount
                 temppst += r.amount
-        if parent_obj.x_pst_total:
+        if parent_obj.x_pst_total  and parent_obj.x_pst_total>0 :
             groups.createproduct(self, parent_obj, PST.id, PST.name + ven_bill_text,
                              temppst,
                              parent_id,
@@ -148,7 +148,7 @@ class groups(models.Model):
                              PST.x_analytic_account.id,
                              self.sequence
                              )
-        if parent_obj.x_gst_total:
+        if parent_obj.x_gst_total and parent_obj.x_gst_total>0:
             groups.createproduct(self, parent_obj, GST.id, GST.name + ven_bill_text,
                              tempgst,
                              parent_id,
