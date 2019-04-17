@@ -88,7 +88,7 @@
 
 
 
-                                <th t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Taxes</span></th>
+                                <!--<th t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Taxes</span></th>-->
                                 <th class="text-right">
                                     <span groups="account.group_show_line_subtotals_tax_excluded">Amount</span>
                                     <span groups="account.group_show_line_subtotals_tax_included">Total Price</span>
@@ -123,9 +123,9 @@
                                             <span t-field="line.discount"/>
                                         </td>
 
-                                        <td t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                        <!--<td t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                             <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.invoice_line_tax_ids))"/>
-                                        </td>
+                                        </td>-->
                                         <td class="text-right">
                                             <span t-field="line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
                                             <span t-field="line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
@@ -388,7 +388,7 @@
 
 <!--o_report_layout_standard-->
 
-            <div class="article o_report_layout_standard "  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')" t-attf-style="background-color: #EFECDD; height: {{o.x_invoicecount * 1015}}px;"><!--;padding-bottom: 50rem; --> <!--29.4-->
+            <div class="article o_report_layout_standard "  t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')" t-attf-style="background-color: #EFECDD; height: {{o.x_invoicecount * 1013}}px;"><!--;padding-bottom: 50rem; --> <!--29.4-->
 
 
 <div style="background-color: #EFECDD;z-index:100">

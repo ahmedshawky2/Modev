@@ -24,7 +24,7 @@ class inovicecount(models.Model):
     def _onchange_inovice_line_id(self):
         #for rec in self:
         #px= 1082
-        px = 1015
+        px = 860#1015
         first = 17
         x = self.env['account.invoice.line'].search_count([('invoice_id', '=', self.id)])
         if(x<=first):
