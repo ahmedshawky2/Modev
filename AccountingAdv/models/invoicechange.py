@@ -23,6 +23,8 @@ class groups(models.Model):
         ],
         string='Management Fees %')
     isMangment = fields.Boolean(string="isMang")
+    GSTLine  = fields.Float(string="GST", required=False)
+    PSTLine = fields.Float(string="PST", required=False)
 
 
 
@@ -138,6 +140,10 @@ class groups(models.Model):
             elif(r.name.startswith("PST")):
                 parent_obj.x_pst_total += r.amount
                 temppst += r.amount
+
+        self.GSTLine =tempgst
+        self.PSTLine = temppst
+        '''
         if parent_obj.x_pst_total  and parent_obj.x_pst_total>0 :
             groups.createproduct(self, parent_obj, PST.id, PST.name + ven_bill_text,
                              temppst,
@@ -158,7 +164,7 @@ class groups(models.Model):
                              GST.x_analytic_account.id,
                              self.sequence
                              )
-
+        '''
 
 
 

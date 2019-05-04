@@ -19,6 +19,12 @@
 
                 <button name="do_calc_bill" type="object" string="Calculate Bill" class="oe_highlight"  attrs="{'invisible': [('x_parent_id', '>', 0)]}"/>
             </field>
+        <field name="price_unit" position="before">
+
+            <field name="GSTLine"/>
+            <field name="PSTLine"/>
+
+        </field>
 
             <field name="amount_tax" position="replace">
 
