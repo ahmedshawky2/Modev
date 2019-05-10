@@ -25,6 +25,7 @@ class groups(models.Model):
     isMangment = fields.Boolean(string="isMang")
     GSTLine  = fields.Float(string="GST", required=False)
     PSTLine = fields.Float(string="PST", required=False)
+    x_untaxed_price = fields.Float(string="Unit Price", required=False)
 
 
 
@@ -34,7 +35,11 @@ class groups(models.Model):
         prod=self.env['product.product'].search([['name','=','Vendor Bill']])
         self.product_id = prod.id
         self.name = self.x_bill.number
-        self.price_unit = self.x_bill.amount_untaxed
+        self.price_unit = self.x_bill.amount_total
+
+        self.x_untaxed_price = self.x_bill.amount_untaxed
+
+
 
     @api.onchange('product_id')
     def prodcutchange(self):
@@ -67,6 +72,7 @@ class groups(models.Model):
             'product_id':product_id,
             'name': desc ,
             'price_unit': unit_price,
+            'x_untaxed_price': unit_price,
             'invoice_id': invoice_id,
             'account_id': account_id,
             'invoice_line_tax_ids': tax_id,
@@ -93,8 +99,7 @@ class groups(models.Model):
         holdbackInvoice = self.env['product.product'].search([['name', '=', 'Holdback Invocie']])
         mangeprod = self.env['product.product'].search([['name', '=', 'Management Fees']])
         RemainingHoldback = self.env['product.product'].search([['name', '=', 'Remaining Holdback']])
-        PST = self.env['product.product'].search([['name', '=', 'PST']])
-        GST = self.env['product.product'].search([['name', '=', 'GST']])
+
         #raise ValidationError(mangeprod)
         parent_id = self.invoice_id.id
         parent_obj = self.env['account.invoice'].browse(parent_id)
@@ -115,6 +120,7 @@ class groups(models.Model):
                               holdbackInvoice.x_analytic_account.id,self.sequence)
 
                 self.price_unit = self.price_unit+abs(record.price_unit)
+                self.x_untaxed_price = self.x_untaxed_price+abs(record.price_unit)
             else:
                 self.name = vendorname +", " + record.product_id.name +" [" +record.product_id.default_code +"]" + ven_bill_text
 
@@ -180,6 +186,7 @@ class groups(models.Model):
                 p=self.env['account.invoice.line'].browse(self.x_parent_id)
                 if p :
                     p.price_unit = p.price_unit - abs(self.price_unit)
+                    p.x_untaxed_price = p.x_untaxed_price -abs(self.price_unit)
             else:
                 if (self.name.startswith("GST")):
                     parent_obj.x_gst_total -= abs(self.price_unit)
