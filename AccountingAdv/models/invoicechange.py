@@ -25,7 +25,7 @@ class groups(models.Model):
     isMangment = fields.Boolean(string="isMang")
     GSTLine  = fields.Float(string="GST", required=False)
     PSTLine = fields.Float(string="PST", required=False)
-    x_untaxed_price = fields.Float(string="Unit Price", required=False)
+    x_untaxed_price = fields.Float( string = "unitPrice_untax", required=False)
 
 
 
