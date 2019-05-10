@@ -3,6 +3,7 @@
     
 
 
+    
 
     <record model="ir.ui.view" id="invoice_form_inhirherit">
     <field name="name">invoice_form_inhirherit</field>
