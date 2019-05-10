@@ -53,13 +53,13 @@ class inovicecount(models.Model):
     @api.depends('x_pst_total','x_gst_total','amount_untaxed')
     def sub_total(self):
         _logger.debug("_onchange_SUBTOTAL")
-        self.x_sub_total=self.amount_untaxed #-self.x_gst_total_inv-self.x_pst_total_inv
+        self.x_sub_total=self.amount_untaxed - self.x_gst_total-self.x_pst_total
 
     @api.one
     @api.depends('x_sub_total','x_gst_total_inv','x_pst_total_inv')
     def inv_total(self):
         _logger.debug("_onchange_TOTAL");
-        self.x_inv_total=self.x_sub_total + self.x_gst_total+self.x_gst_total
+        self.x_inv_total=self.x_sub_total + self.x_gst_total+self.x_pst_total
 
 
 '''
